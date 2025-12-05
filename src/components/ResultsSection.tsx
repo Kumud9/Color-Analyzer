@@ -8,6 +8,7 @@ import {
   ColorInfo,
   MetalInfo
 } from "@/types/colorAnalysis";
+import ToneAnimation from "./ToneAnimation";
 
 interface ResultsSectionProps {
   undertone: UndertoneType;
@@ -82,8 +83,11 @@ const ResultsSection = ({ undertone, eyeColor, hairColor, onReset, onColorCheck 
   const Icon = info.icon;
 
   return (
-    <div className="py-16 px-4 bg-navy-dark">
-      <div className="max-w-4xl mx-auto">
+    <div className="py-16 px-4 bg-navy-dark relative overflow-hidden">
+      {/* Tone-specific animation */}
+      <ToneAnimation undertone={undertone} />
+      
+      <div className="max-w-4xl mx-auto relative z-10">
         {/* Result Badge */}
         <div className="text-center mb-12">
           <div className="result-badge mb-6 mx-auto w-fit">

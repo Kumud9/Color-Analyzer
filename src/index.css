@@ -4,6 +4,101 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+/* Tone Animations */
+@keyframes snow {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes ray {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -100%) rotate(var(--rotation)) scaleY(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate(-50%, -100%) rotate(var(--rotation)) scaleY(1.2);
+  }
+}
+
+@keyframes cloud {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+@keyframes petal {
+  0% {
+    transform: translateY(-10px) rotate(0deg) translateX(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg) translateX(30px);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg) translateX(-20px);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+.animate-snow {
+  animation: snow 8s linear infinite;
+}
+
+.animate-float-up {
+  animation: float-up 10s ease-out infinite;
+}
+
+.animate-ray {
+  animation: ray 2s ease-in-out infinite;
+}
+
+.animate-cloud {
+  animation: cloud 30s linear infinite;
+}
+
+.animate-petal {
+  animation: petal 12s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
 @layer base {
   :root {
     /* Core palette */
