@@ -1,7 +1,7 @@
 import { Camera, FileQuestion } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import FloatingIcons from "./FloatingIcons";
-import heroBg from "@/assets/hero-bg.jpg";
+import SkinToneAnimation from "./SkinToneAnimation";
 
 interface HeroSectionProps {
   onSelectMethod: (method: "photo" | "quiz") => void;
@@ -10,15 +10,10 @@ interface HeroSectionProps {
 const HeroSection = ({ onSelectMethod }: HeroSectionProps) => {
   return (
     <section 
-      className="relative min-h-[70vh] flex items-center justify-center overflow-hidden"
-      style={{
-        backgroundImage: `url(${heroBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
+      className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-navy-dark"
     >
-      {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-navy-dark/40" />
+      {/* Animated skin tone background */}
+      <SkinToneAnimation />
       
       {/* Floating decorative icons */}
       <FloatingIcons />
