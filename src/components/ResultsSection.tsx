@@ -23,7 +23,13 @@ const UndertoneDescriptions = {
     icon: Snowflake,
     badge: "❄️ COOL TONE",
     title: "You're a Cool Tone!",
+    tagline: "Ice queen energy! ❄️✨ You were born to slay in silvers and jewel tones, bestie!",
     description: "Your coloring has blue-based undertones. Think pink, red, or blue hues in your skin. Silver jewelry makes you shine, and you probably burn before you tan. Cool tones look stunning in icy blues, jewel tones, and crisp whites.",
+    sassyQuotes: [
+      "You + silver jewelry = main character vibes 💎",
+      "The sun said 'burn baby burn' and you said 'fine, I'll look ethereal anyway' ☀️🔥",
+      "Blue undertones? More like 'always looking expensive' undertones 💅",
+    ],
     traits: [
       "Skin has pink/red/blue undertones",
       "Veins look blue or purple",
@@ -35,7 +41,13 @@ const UndertoneDescriptions = {
     icon: Flame,
     badge: "🔥 WARM TONE",
     title: "You're a Warm Tone!",
+    tagline: "Golden hour is YOUR hour, honey! 🌅✨ You're basically a walking sunset!",
     description: "Your coloring has yellow-based undertones. Think golden, peachy, or olive hues in your skin. Gold jewelry makes you glow, and you tan easily. Warm tones look amazing in earthy colors, warm neutrals, and rich autumn shades.",
+    sassyQuotes: [
+      "Gold jewelry on you? That's not drip, that's a FLOOD 🌊👑",
+      "The sun literally loves you - tanning like it's your full-time job ☀️😎",
+      "Warm undertones = naturally glowing without highlighter 💫",
+    ],
     traits: [
       "Skin has yellow/golden/peach undertones",
       "Veins look greenish",
@@ -47,7 +59,13 @@ const UndertoneDescriptions = {
     icon: Moon,
     badge: "🌓 NEUTRAL TONE",
     title: "You're a Neutral Tone!",
+    tagline: "The ultimate chameleon! 🦎✨ You can literally pull off ANYTHING, and that's iconic!",
     description: "Lucky you! Your coloring doesn't lean strongly warm or cool. You can rock both silver and gold, and look good in a wide range of colors. Stick to muted, balanced shades that aren't too extreme in either direction.",
+    sassyQuotes: [
+      "Silver or gold? YES. Both look fire on you 🔥💅",
+      "You're the 'I woke up like this' of undertones 💁‍♀️",
+      "Balanced skin = maximum fashion flexibility 🎨👗",
+    ],
     traits: [
       "Skin doesn't lean clearly warm or cool",
       "Veins look a mix of blue + green",
@@ -98,10 +116,27 @@ const ResultsSection = ({ undertone, eyeColor, hairColor, onReset, onColorCheck 
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 glow-text-aqua">
             {info.title}
           </h2>
+
+          {/* Sassy Tagline */}
+          <p className="text-xl md:text-2xl font-semibold text-aqua mb-4 italic">
+            {info.tagline}
+          </p>
           
           <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
             {info.description}
           </p>
+
+          {/* Sassy Quotes */}
+          <div className="grid md:grid-cols-3 gap-4 mb-8 max-w-3xl mx-auto">
+            {info.sassyQuotes.map((quote, i) => (
+              <div 
+                key={i}
+                className="p-4 rounded-xl bg-card/50 border border-aqua/30 text-sm text-foreground/90 italic"
+              >
+                "{quote}"
+              </div>
+            ))}
+          </div>
 
           {/* Traits */}
           <div className="flex flex-wrap justify-center gap-3 mb-8">
