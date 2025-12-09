@@ -8,9 +8,9 @@ import {
   QuizAnswers,
   determineUndertone 
 } from "@/types/colorAnalysis";
-import veinsReference from "@/assets/veins-reference.jpg";
-import eyeChartReference from "@/assets/eye-chart-reference.png";
-import hairChartReference from "@/assets/hair-chart-reference.jpg";
+import veinsChart from "@/assets/veins-chart.png";
+import eyeChart from "@/assets/eye-chart.png";
+import hairChart from "@/assets/hair-chart.png";
 
 interface QuizAnalyzerProps {
   onComplete: (undertone: UndertoneType, eyeColor: EyeColor | null, hairColor: HairColor | null) => void;
@@ -76,8 +76,41 @@ const QuizAnalyzer = ({ onComplete, onBack }: QuizAnalyzerProps) => {
     return false;
   };
 
+  // Undertone options based on vein chart
+  const undertoneOptions = [
+    { value: "blue-purple", label: "Cool", desc: "Blue/Purple Veins" },
+    { value: "mix", label: "Neutral", desc: "Bluish-Green Veins" },
+    { value: "green", label: "Warm", desc: "Green/Olive Veins" },
+  ];
+
+  // Eye color options matching the chart
+  const eyeColorOptions = [
+    { value: "warm-brown", label: "Brown" },
+    { value: "blue", label: "Blue" },
+    { value: "cool-green", label: "Green" },
+    { value: "grey", label: "Black" },
+    { value: "hazel", label: "Hazel" },
+    { value: "olive", label: "Amber" },
+    { value: "cool-brown", label: "Grey" },
+    { value: "mixed", label: "Dark Blue" },
+  ];
+
+  // Hair color options matching the chart
+  const hairColorOptions = [
+    { value: "black", label: "Black" },
+    { value: "warm-black", label: "Dark Brown" },
+    { value: "ashy-brown", label: "Light Ash Brown" },
+    { value: "copper", label: "Medium Copper" },
+    { value: "golden-brown", label: "Medium Blonde" },
+    { value: "auburn", label: "Blonde Red" },
+    { value: "red", label: "Deep Red" },
+    { value: "cool-blonde", label: "Light Ash Blonde" },
+    { value: "platinum", label: "Very Light Blonde" },
+    { value: "neutral", label: "Extreme Blonde" },
+  ];
+
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-3xl mx-auto">
       <ProgressIndicator currentStep={step} totalSteps={3} stepLabels={stepLabels} />
 
       {/* Step 1: Undertone Quiz */}
@@ -87,40 +120,31 @@ const QuizAnalyzer = ({ onComplete, onBack }: QuizAnalyzerProps) => {
             Let's Find Your Undertone ✨
           </h3>
 
-          {/* Vein Reference Image */}
-          <div className="mb-6">
-            <div className="rounded-2xl overflow-hidden border border-border/30 shadow-lg">
+          {/* Vein Reference Chart - Clickable */}
+          <div>
+            <p className="text-foreground font-medium mb-2 text-center">Compare your wrist veins & select your undertone</p>
+            <p className="text-muted-foreground text-sm text-center mb-4">Check your inner wrist in natural light 👀</p>
+            
+            <div className="rounded-2xl overflow-hidden border border-border/30 shadow-lg mb-4">
               <img 
-                src={veinsReference} 
-                alt="Vein color undertone guide - Blue/purple veins indicate cool undertone, green veins indicate warm undertone, bluish-green indicates neutral" 
+                src={veinsChart} 
+                alt="Vein color undertone guide" 
                 className="w-full h-auto object-cover"
               />
             </div>
-            <p className="text-xs text-muted-foreground text-center mt-2">
-              📸 Compare your wrist veins with the reference above for accurate results!
-            </p>
-          </div>
-
-          {/* Vein Color */}
-          <div>
-            <p className="text-foreground font-medium mb-2">What color do your veins look?</p>
-            <p className="text-muted-foreground text-sm mb-4">Check the inside of your wrist in natural light 👀</p>
-            <div className="grid grid-cols-3 gap-4">
-              {[
-                { value: "blue-purple", label: "Blue / Purple", color: "linear-gradient(135deg, #4a6cf7, #9b59b6)", emoji: "💜", desc: "Cool Undertone" },
-                { value: "green", label: "Green / Olive", color: "linear-gradient(135deg, #27ae60, #2ecc71)", emoji: "💚", desc: "Warm Undertone" },
-                { value: "mix", label: "Bluish-Green", color: "linear-gradient(135deg, #3498db, #2ecc71)", emoji: "💙💚", desc: "Neutral Undertone" },
-              ].map((option) => (
+            
+            <div className="grid grid-cols-3 gap-3">
+              {undertoneOptions.map((option) => (
                 <button
                   key={option.value}
                   onClick={() => setQuizAnswers({ ...quizAnswers, veinColor: option.value as QuizAnswers["veinColor"] })}
-                  className={`quiz-option flex flex-col items-center gap-2 p-4 ${quizAnswers.veinColor === option.value ? 'selected' : ''}`}
+                  className={`p-4 rounded-xl border-2 transition-all duration-300 ${
+                    quizAnswers.veinColor === option.value 
+                      ? 'border-primary bg-primary/10 shadow-lg scale-105' 
+                      : 'border-border/50 hover:border-primary/50 hover:bg-muted/50'
+                  }`}
                 >
-                  <div 
-                    className="w-16 h-16 rounded-full border-2 border-border/50 shadow-lg"
-                    style={{ background: option.color }}
-                  />
-                  <span className="text-sm font-medium">{option.emoji} {option.label}</span>
+                  <span className="text-sm font-bold block">{option.label}</span>
                   <span className="text-xs text-muted-foreground">{option.desc}</span>
                 </button>
               ))}
@@ -143,7 +167,7 @@ const QuizAnalyzer = ({ onComplete, onBack }: QuizAnalyzerProps) => {
                   className={`quiz-option flex flex-col items-center gap-2 p-4 ${quizAnswers.jewelryPreference === option.value ? 'selected' : ''}`}
                 >
                   <div 
-                    className="w-16 h-16 rounded-full border-2 border-border/50 shadow-lg"
+                    className="w-14 h-14 rounded-full border-2 border-border/50 shadow-lg"
                     style={{ background: option.color }}
                   />
                   <span className="text-sm">{option.emoji} {option.label}</span>
@@ -184,43 +208,35 @@ const QuizAnalyzer = ({ onComplete, onBack }: QuizAnalyzerProps) => {
             What's Your Eye Color? 👁️
           </h3>
           <p className="text-muted-foreground text-sm text-center mb-6">
-            Click on the eye color that matches yours best! ✨
+            Use the chart as reference, then click to select ✨
           </p>
 
-          {/* Eye Color Chart as Clickable Options */}
-          <div className="relative rounded-2xl overflow-hidden border border-border/30 shadow-lg bg-white">
+          {/* Eye Color Chart Reference */}
+          <div className="rounded-2xl overflow-hidden border border-border/30 shadow-lg mb-6 bg-[#1a1a1a]">
             <img 
-              src={eyeChartReference} 
-              alt="Eye color chart" 
+              src={eyeChart} 
+              alt="Eye color reference chart" 
               className="w-full h-auto object-contain"
             />
-            {/* Overlay clickable buttons on the chart */}
-            <div className="absolute inset-0 grid grid-cols-4 grid-rows-2 gap-1 p-2">
-              {[
-                { value: "warm-brown", label: "Brown" },
-                { value: "blue", label: "Blue" },
-                { value: "cool-green", label: "Green" },
-                { value: "grey", label: "Black/Grey" },
-                { value: "hazel", label: "Amber" },
-                { value: "olive", label: "Hazel" },
-                { value: "cool-brown", label: "Grey" },
-                { value: "mixed", label: "Other" },
-              ].map((option) => (
-                <button
-                  key={option.value}
-                  onClick={() => setEyeColor(option.value as EyeColor)}
-                  className={`rounded-xl transition-all duration-300 hover:bg-white/20 hover:ring-2 hover:ring-primary/50 ${
-                    eyeColor === option.value 
-                      ? 'bg-primary/30 ring-4 ring-primary shadow-lg' 
-                      : 'bg-transparent'
-                  }`}
-                  title={option.label}
-                />
-              ))}
-            </div>
           </div>
           
-          {/* Selected indicator */}
+          {/* Eye Color Buttons */}
+          <div className="grid grid-cols-4 gap-3">
+            {eyeColorOptions.map((option) => (
+              <button
+                key={option.value}
+                onClick={() => setEyeColor(option.value as EyeColor)}
+                className={`p-3 rounded-xl border-2 transition-all duration-300 text-center ${
+                  eyeColor === option.value 
+                    ? 'border-primary bg-primary/10 shadow-lg scale-105' 
+                    : 'border-border/50 hover:border-primary/50 hover:bg-muted/50'
+                }`}
+              >
+                <span className="text-sm font-medium">{option.label}</span>
+              </button>
+            ))}
+          </div>
+          
           {eyeColor && (
             <p className="text-center mt-4 text-primary font-medium">
               ✓ Selected: {eyeColor.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
@@ -236,45 +252,35 @@ const QuizAnalyzer = ({ onComplete, onBack }: QuizAnalyzerProps) => {
             What's Your Natural Hair Color? 💇‍♀️
           </h3>
           <p className="text-muted-foreground text-sm text-center mb-6">
-            Click on the hair color that matches your natural shade! 💅
+            Use the chart as reference, then click to select 💅
           </p>
 
-          {/* Hair Color Chart as Clickable Options */}
-          <div className="relative rounded-2xl overflow-hidden border border-border/30 shadow-lg">
+          {/* Hair Color Chart Reference */}
+          <div className="rounded-2xl overflow-hidden border border-border/30 shadow-lg mb-6 bg-[#1a1a1a]">
             <img 
-              src={hairChartReference} 
-              alt="Hair color chart" 
-              className="w-full h-auto object-cover"
+              src={hairChart} 
+              alt="Hair color reference chart" 
+              className="w-full h-auto object-contain"
             />
-            {/* Overlay clickable buttons on the chart - 2 rows of 5 columns */}
-            <div className="absolute inset-0 grid grid-cols-5 grid-rows-2 gap-1 p-2">
-              {[
-                { value: "black", label: "1 - Black" },
-                { value: "warm-black", label: "2 - Darkest Brown" },
-                { value: "ashy-brown", label: "3 - Dark Brown" },
-                { value: "golden-brown", label: "4 - Medium Brown" },
-                { value: "copper", label: "5 - Light Brown" },
-                { value: "auburn", label: "6 - Dark Blonde" },
-                { value: "cool-blonde", label: "7 - Medium Blonde" },
-                { value: "cool-blonde", label: "8 - Light Blonde" },
-                { value: "cool-blonde", label: "9 - Very Light Blonde" },
-                { value: "neutral", label: "10 - Lightest Blonde" },
-              ].map((option, index) => (
-                <button
-                  key={index}
-                  onClick={() => setHairColor(option.value as HairColor)}
-                  className={`rounded-lg transition-all duration-300 hover:bg-white/20 hover:ring-2 hover:ring-primary/50 ${
-                    hairColor === option.value 
-                      ? 'bg-primary/30 ring-4 ring-primary shadow-lg' 
-                      : 'bg-transparent'
-                  }`}
-                  title={option.label}
-                />
-              ))}
-            </div>
           </div>
           
-          {/* Selected indicator */}
+          {/* Hair Color Buttons */}
+          <div className="grid grid-cols-5 gap-3">
+            {hairColorOptions.map((option) => (
+              <button
+                key={option.value}
+                onClick={() => setHairColor(option.value as HairColor)}
+                className={`p-3 rounded-xl border-2 transition-all duration-300 text-center ${
+                  hairColor === option.value 
+                    ? 'border-primary bg-primary/10 shadow-lg scale-105' 
+                    : 'border-border/50 hover:border-primary/50 hover:bg-muted/50'
+                }`}
+              >
+                <span className="text-xs font-medium">{option.label}</span>
+              </button>
+            ))}
+          </div>
+          
           {hairColor && (
             <p className="text-center mt-4 text-primary font-medium">
               ✓ Selected: {hairColor.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
