@@ -8,6 +8,9 @@ import {
   QuizAnswers,
   determineUndertone 
 } from "@/types/colorAnalysis";
+import veinsReference from "@/assets/veins-reference.jpg";
+import eyeChartReference from "@/assets/eye-chart-reference.png";
+import hairChartReference from "@/assets/hair-chart-reference.jpg";
 
 interface QuizAnalyzerProps {
   onComplete: (undertone: UndertoneType, eyeColor: EyeColor | null, hairColor: HairColor | null) => void;
@@ -84,15 +87,29 @@ const QuizAnalyzer = ({ onComplete, onBack }: QuizAnalyzerProps) => {
             Let's Find Your Undertone ✨
           </h3>
 
+          {/* Vein Reference Image */}
+          <div className="mb-6">
+            <div className="rounded-2xl overflow-hidden border border-border/30 shadow-lg">
+              <img 
+                src={veinsReference} 
+                alt="Vein color undertone guide - Blue/purple veins indicate cool undertone, green veins indicate warm undertone, bluish-green indicates neutral" 
+                className="w-full h-auto object-cover"
+              />
+            </div>
+            <p className="text-xs text-muted-foreground text-center mt-2">
+              📸 Compare your wrist veins with the reference above for accurate results!
+            </p>
+          </div>
+
           {/* Vein Color */}
           <div>
             <p className="text-foreground font-medium mb-2">What color do your veins look?</p>
             <p className="text-muted-foreground text-sm mb-4">Check the inside of your wrist in natural light 👀</p>
             <div className="grid grid-cols-3 gap-4">
               {[
-                { value: "blue-purple", label: "Blue / Purple", color: "linear-gradient(135deg, #4a6cf7, #9b59b6)", emoji: "💜" },
-                { value: "green", label: "Green", color: "linear-gradient(135deg, #27ae60, #2ecc71)", emoji: "💚" },
-                { value: "mix", label: "Mix of both", color: "linear-gradient(135deg, #3498db, #2ecc71)", emoji: "💙💚" },
+                { value: "blue-purple", label: "Blue / Purple", color: "linear-gradient(135deg, #4a6cf7, #9b59b6)", emoji: "💜", desc: "Cool Undertone" },
+                { value: "green", label: "Green / Olive", color: "linear-gradient(135deg, #27ae60, #2ecc71)", emoji: "💚", desc: "Warm Undertone" },
+                { value: "mix", label: "Bluish-Green", color: "linear-gradient(135deg, #3498db, #2ecc71)", emoji: "💙💚", desc: "Neutral Undertone" },
               ].map((option) => (
                 <button
                   key={option.value}
@@ -103,15 +120,10 @@ const QuizAnalyzer = ({ onComplete, onBack }: QuizAnalyzerProps) => {
                     className="w-16 h-16 rounded-full border-2 border-border/50 shadow-lg"
                     style={{ background: option.color }}
                   />
-                  <span className="text-sm">{option.emoji} {option.label}</span>
+                  <span className="text-sm font-medium">{option.emoji} {option.label}</span>
+                  <span className="text-xs text-muted-foreground">{option.desc}</span>
                 </button>
               ))}
-            </div>
-            {/* Reference image hint */}
-            <div className="mt-4 p-4 rounded-xl bg-card/50 border border-border/30">
-              <p className="text-xs text-muted-foreground text-center">
-                💡 Tip: Look at your inner wrist where veins are visible. Blue/purple = cool, Green = warm, Mix = neutral
-              </p>
             </div>
           </div>
 
@@ -171,9 +183,24 @@ const QuizAnalyzer = ({ onComplete, onBack }: QuizAnalyzerProps) => {
           <h3 className="text-xl font-bold text-foreground text-center mb-2">
             What's Your Eye Color? 👁️
           </h3>
-          <p className="text-muted-foreground text-sm text-center mb-6">
+          <p className="text-muted-foreground text-sm text-center mb-4">
             Pick the one that matches yours best - your windows to the soul! ✨
           </p>
+          
+          {/* Eye Color Reference Chart */}
+          <div className="mb-6">
+            <div className="rounded-2xl overflow-hidden border border-border/30 shadow-lg bg-white">
+              <img 
+                src={eyeChartReference} 
+                alt="Eye color chart showing brown, blue, green, black, amber, hazel, grey and various shades for accurate comparison" 
+                className="w-full h-auto object-contain max-h-80 mx-auto"
+              />
+            </div>
+            <p className="text-xs text-muted-foreground text-center mt-2">
+              📸 Use this chart to find your exact eye color match!
+            </p>
+          </div>
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { value: "grey", label: "Grey", color: "#808080", ring: "#A0A0A0" },
@@ -219,9 +246,24 @@ const QuizAnalyzer = ({ onComplete, onBack }: QuizAnalyzerProps) => {
           <h3 className="text-xl font-bold text-foreground text-center mb-2">
             What's Your Natural Hair Color? 💇‍♀️
           </h3>
-          <p className="text-muted-foreground text-sm text-center mb-6">
+          <p className="text-muted-foreground text-sm text-center mb-4">
             Think about your natural color (not the dye job, bestie!) 💅
           </p>
+          
+          {/* Hair Color Reference Chart */}
+          <div className="mb-6">
+            <div className="rounded-2xl overflow-hidden border border-border/30 shadow-lg">
+              <img 
+                src={hairChartReference} 
+                alt="Hair color chart showing black, dark brown, light brown, copper, blonde and various shades for accurate comparison" 
+                className="w-full h-auto object-cover"
+              />
+            </div>
+            <p className="text-xs text-muted-foreground text-center mt-2">
+              📸 Match your natural hair color with this reference chart!
+            </p>
+          </div>
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { value: "ashy-brown", label: "Ashy Brown", color: "#6B5B4F", highlight: "#8B7B6F" },
