@@ -2,6 +2,7 @@ import { useState, useRef, useCallback } from "react";
 import { Upload, Camera, X, Loader2, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { UndertoneType } from "@/types/colorAnalysis";
+import { analyzeSkinUndertone } from "@/lib/skinAnalysis";
 
 interface PhotoAnalyzerProps {
   onAnalyze: (undertone: UndertoneType) => void;
@@ -13,6 +14,11 @@ const PhotoAnalyzer = ({ onAnalyze, onBack }: PhotoAnalyzerProps) => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isCameraMode, setIsCameraMode] = useState(false);
   const [stream, setStream] = useState<MediaStream | null>(null);
+  const [analysisDetails, setAnalysisDetails] = useState<{
+    confidence: number;
+    coolScore: number;
+    warmScore: number;
+  } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -23,6 +29,7 @@ const PhotoAnalyzer = ({ onAnalyze, onBack }: PhotoAnalyzerProps) => {
       const reader = new FileReader();
       reader.onload = (event) => {
         setImage(event.target?.result as string);
+        setAnalysisDetails(null);
       };
       reader.readAsDataURL(file);
     }
@@ -69,25 +76,40 @@ const PhotoAnalyzer = ({ onAnalyze, onBack }: PhotoAnalyzerProps) => {
         context.drawImage(video, 0, 0);
         const imageData = canvas.toDataURL('image/jpeg');
         setImage(imageData);
+        setAnalysisDetails(null);
         stopCamera();
       }
     }
   };
 
-  const analyzePhoto = () => {
+  const analyzePhoto = async () => {
+    if (!image) return;
+    
     setIsAnalyzing(true);
     
-    // Simulated AI analysis - in production, this would call an actual AI model
-    setTimeout(() => {
-      const undertones: UndertoneType[] = ["cool", "warm", "neutral"];
-      const randomUndertone = undertones[Math.floor(Math.random() * undertones.length)];
+    try {
+      // Real color analysis of the uploaded image
+      const result = await analyzeSkinUndertone(image);
+      
+      setAnalysisDetails({
+        confidence: result.confidence,
+        coolScore: result.coolScore,
+        warmScore: result.warmScore,
+      });
+      
       setIsAnalyzing(false);
-      onAnalyze(randomUndertone);
-    }, 2000);
+      onAnalyze(result.undertone);
+    } catch (error) {
+      console.error("Analysis error:", error);
+      setIsAnalyzing(false);
+      // Fallback to neutral if analysis fails
+      onAnalyze("neutral");
+    }
   };
 
   const clearImage = () => {
     setImage(null);
+    setAnalysisDetails(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
