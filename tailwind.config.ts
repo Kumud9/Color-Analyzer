@@ -47,6 +47,21 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        cream: {
+          DEFAULT: "hsl(var(--cream))",
+          light: "hsl(var(--cream-light))",
+          dark: "hsl(var(--cream-dark))",
+        },
+        coffee: {
+          DEFAULT: "hsl(var(--coffee))",
+        },
+        subtle: {
+          DEFAULT: "hsl(var(--subtle))",
+        },
+        headline: {
+          DEFAULT: "hsl(var(--headline))",
+        },
+        // Legacy color tokens for compatibility
         gold: {
           DEFAULT: "hsl(var(--gold))",
           light: "hsl(var(--gold-light))",
@@ -78,6 +93,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Playfair Display', 'serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -109,8 +125,8 @@ export default {
         glow: "glow 2s ease-in-out infinite",
       },
       boxShadow: {
-        glow: "0 0 20px hsl(var(--aqua) / 0.4), 0 0 40px hsl(var(--aqua) / 0.2)",
-        "glow-gold": "0 0 20px hsl(var(--gold) / 0.4), 0 0 40px hsl(var(--gold) / 0.2)",
+        glow: "0 0 20px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary) / 0.15)",
+        "glow-soft": "0 0 20px hsl(var(--soft-pink) / 0.4), 0 0 40px hsl(var(--soft-pink) / 0.2)",
       },
     },
   },
