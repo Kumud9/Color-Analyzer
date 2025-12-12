@@ -135,67 +135,75 @@
 
 @layer base {
   :root {
-    /* Core palette - Elegant warm tones */
-    --cream: 30 29% 94%;
-    --headline: 213 29% 21%;
-    --subtle: 200 5% 47%;
-    --coffee: 25 30% 32%;
-    --accent: 10 42% 24%;
-    --soft-pink: 340 30% 85%;
-    --soft-blue: 210 40% 85%;
+    /* Core palette - Silk Pink & Blue tones */
+    --silk-pink: 340 45% 75%;
+    --silk-pink-light: 340 40% 88%;
+    --silk-pink-dark: 340 50% 60%;
+    --silk-blue: 215 50% 72%;
+    --silk-blue-light: 215 45% 88%;
+    --silk-blue-dark: 215 55% 55%;
+    --silk-lavender: 280 30% 80%;
+    
+    /* Text colors */
+    --headline: 215 45% 25%;
+    --subtle: 215 20% 50%;
+    --coffee: 340 35% 35%;
+    --soft-pink: 340 45% 75%;
+    --soft-blue: 215 50% 72%;
     
     /* Light backgrounds */
-    --cream-light: 30 29% 97%;
-    --cream-dark: 30 25% 88%;
+    --cream: 340 25% 96%;
+    --cream-light: 340 20% 98%;
+    --cream-dark: 340 20% 92%;
     
     /* Semantic tokens */
-    --background: 30 29% 94%;
-    --foreground: 213 29% 21%;
+    --background: 340 25% 96%;
+    --foreground: 215 45% 25%;
     
     --card: 0 0% 100%;
-    --card-foreground: 213 29% 21%;
+    --card-foreground: 215 45% 25%;
     
     --popover: 0 0% 100%;
-    --popover-foreground: 213 29% 21%;
+    --popover-foreground: 215 45% 25%;
     
-    --primary: 10 42% 24%;
+    --primary: 340 50% 55%;
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 25 30% 32%;
+    --secondary: 215 50% 60%;
     --secondary-foreground: 0 0% 100%;
     
-    --muted: 30 20% 90%;
-    --muted-foreground: 200 5% 47%;
+    --muted: 340 20% 92%;
+    --muted-foreground: 215 20% 50%;
     
-    --accent: 213 40% 38%;
+    --accent: 215 50% 60%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 30 15% 82%;
-    --input: 30 20% 88%;
-    --ring: 10 42% 24%;
+    --border: 340 20% 85%;
+    --input: 340 15% 90%;
+    --ring: 340 50% 55%;
     
     --radius: 0.75rem;
     
     /* Gradients */
-    --gradient-header: linear-gradient(135deg, hsl(340 30% 90%), hsl(210 40% 90%));
-    --gradient-hero: linear-gradient(rgba(245, 241, 236, 0.85), rgba(245, 241, 236, 0.85));
-    --gradient-glow-pink: 0 0 30px hsl(340 30% 85% / 0.5), 0 0 60px hsl(340 30% 85% / 0.3);
-    --gradient-glow-accent: 0 0 20px hsl(10 42% 24% / 0.3);
+    --gradient-header: linear-gradient(135deg, hsl(340 40% 92% / 0.95), hsl(215 45% 92% / 0.95));
+    --gradient-hero: linear-gradient(rgba(252, 248, 250, 0.82), rgba(248, 250, 252, 0.82));
+    --gradient-glow-pink: 0 0 30px hsl(340 45% 75% / 0.5), 0 0 60px hsl(340 45% 75% / 0.3);
+    --gradient-glow-blue: 0 0 20px hsl(215 50% 72% / 0.4);
     
     /* Legacy tokens for compatibility */
-    --gold: 25 30% 32%;
-    --gold-light: 30 25% 45%;
-    --gold-dark: 25 35% 25%;
-    --aqua: 210 40% 70%;
-    --aqua-glow: 210 40% 80%;
-    --neon-blue: 213 40% 50%;
-    --neon-blue-glow: 213 40% 65%;
-    --navy-dark: 213 29% 21%;
-    --navy: 213 25% 30%;
-    --navy-light: 213 20% 40%;
+    --gold: 340 35% 35%;
+    --gold-light: 340 30% 55%;
+    --gold-dark: 340 40% 30%;
+    --aqua: 215 50% 72%;
+    --aqua-glow: 215 45% 82%;
+    --neon-blue: 215 55% 55%;
+    --neon-blue-glow: 215 50% 70%;
+    --navy-dark: 215 45% 25%;
+    --navy: 215 40% 35%;
+    --navy-light: 215 35% 45%;
     
     /* Sidebar tokens */
     --sidebar-background: 30 25% 92%;
